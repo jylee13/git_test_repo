@@ -35,7 +35,7 @@ jobs:
     - name: Set application.yml
       env: 
         APPLICATION_YML_FILE: ${{ secrets.APPLICATION }} 
-      run: APPLICATION_YML_FILE > ./src/main/resources/application.yml
+      run: echo $APPLICATION_YML_FILE > ./src/main/resources/application.yml
       
     - name: Run chmod to make gradlew executable
       run: chmod +x ./gradlew
