@@ -18,9 +18,6 @@ on:
 permissions:
   contents: read
 
-env:
-  RESOURCE_PATH: ./src/main/resources/application.yml
-
 # workflow는 한개 이상의 job을 가지며, 각 job은 여러 step에 따라 단계를 나눌 수 있다.
 jobs:
   build:
@@ -36,14 +33,10 @@ jobs:
         distribution: 'temurin'
         
     - name: Set application.yml
-      uses: microsoft/variable-substitution@v1
-      with:
-        files: ${{ env.RESOURCE_PATH }}
-      env: 
-        DB_URL: ${{ secrets.DB_URL }}
-        DB_USERNAME: ${{ secrets.DB_USERNAME }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-
+        touch ./src/main/resources/application.yml
+        echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.yml
+        cat ./src/main/resources/application.yml
+        
     - name: Run chmod to make gradlew executable
       run: chmod +x ./gradlew
         
