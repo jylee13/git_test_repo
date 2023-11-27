@@ -33,11 +33,10 @@ jobs:
         distribution: 'temurin'
         
     - name: Set application.yml
-      uses: |
-        touch ./src/main/resources/application.yml
-        echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.yml
-        cat ./src/main/resources/application.yml
-        
+      env: 
+        APPLICATION_YML_FILE: ${{ secrets.APPLICATION }} 
+      run: APPLICATION_YML_FILE > ./src/main/resources/application.yml
+      
     - name: Run chmod to make gradlew executable
       run: chmod +x ./gradlew
         
