@@ -33,11 +33,10 @@ jobs:
         distribution: 'temurin'
         
     - name: Copy application.yml
-    - shell: bash
       env: 
         APPLICATION_YML_FILE: ${{ secrets.APPLICATION }}
       run: |
-        echo $APPLICATION_YML_FILE > src/main/resources/application.yml
+        echo $APPLICATION_YML_FILE | base64 --decode > src/main/resources/application.yml
 
     - name: Run chmod to make gradlew executable
       run: chmod +x ./gradlew
