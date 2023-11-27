@@ -33,9 +33,8 @@ jobs:
         distribution: 'temurin'
         
     - name: Make application.yml
-      run: |
-        cd ./src/main/resources
-        touch ./application.yml
+      run: 
+        touch ./src/main/resources/application.yml
         echo "${{secrets.APPLICATION}}" > ./src/main/resources/application.yml
         cat ./src/main/resources/application.yml
         
